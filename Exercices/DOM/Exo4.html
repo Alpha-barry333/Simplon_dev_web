@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 4</title>
+</head>
+<body>
+    <form id="formulaire-contact">
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" placeholder="Votre prénom">
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <script>
+        //Partie : Formulaire
+        const formulaire = document.querySelector('#formulaire-contact');
+        const inputPrenom = document.querySelector('#prenom');
+
+        formulaire.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            if (inputPrenom.value.trim() === "") {
+                alert("Le champ prénom est vide !");
+            } else {
+                console.log("Formulaire validé (mais non envoyé)!");
+            }
+        });
+
+        // Partie B : Load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Page entièrement chargée et prête pour le DOM!");
+        });
+
+    </script>
+</body>
+</html>

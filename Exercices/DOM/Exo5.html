@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 5</title>
+</head>
+<body>
+        <style>
+        .boite-couleur { width: 100px; height: 100px; margin: 10px; display: inline-block; border: 1px solid #000; cursor: pointer; }
+        </style>
+        <div class="boite-couleur" style="background-color: red;"></div>
+        <div class="boite-couleur" style="background-color: blue;"></div>
+        <div class="boite-couleur" style="background-color: orange;"></div>
+
+        <script>
+        const boites = document.querySelectorAll('.boite-couleur');
+        boites.forEach((boite, index) => {
+            boite.addEventListener('click', () => {
+                console.log(`Vous avez cliqué sur la boîte nº ${index}`);
+                boites.forEach(b => {
+
+                    b.style.backgroundColor = 'gray'; // Les autres deviennent grises
+                });
+                
+                // La boîte cliquée devient verte
+                boite.style.backgroundColor = 'green';
+            });
+        });
+
+
+    </script>
+</body>
+</html>

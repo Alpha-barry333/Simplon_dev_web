@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 6</title>
+</head>
+<body>
+    <div id="parent" style="padding: 20px; border: 2px solid blue; margin-bottom: 20px;">Parent
+        <button id="enfant">Cliquez-moi (Enfant)</button>
+    </div>
+
+    <button id="btn-alerte">Bouton Alerte</button>
+    <button id="btn-desactiver">Désactiver Alerte</button>
+
+    <script>
+        // --- Partie A : Propagation
+        const parent = document.querySelector('#parent');
+        const enfant = document.querySelector('#enfant');
+
+        
+        parent.addEventListener('click', () => {
+            console.log("Click sur le Parent");
+        });
+
+        enfant.addEventListener('click', (event) => {
+            console.log("Click sur l'Enfant");
+
+            event.stopPropagation(); 
+        });
+
+        // --- Partie B : Suppression
+        const btnAlerte = document.querySelector('#btn-alerte');
+        const btnDesactiver = document.querySelector('#btn-desactiver');
+
+        function alerteMessage() {
+            alert("Alerte !");
+        }
+        btnAlerte.addEventListener('click', alerteMessage);
+
+        btnDesactiver.addEventListener('click', () => {
+            btnAlerte.removeEventListener('click', alerteMessage);
+            console.log("L'alerte a été désactivée.");
+        });
+
+    </script>
+</body>
+</html>

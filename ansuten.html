@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ansuten+ - Bibliothèque</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+<style>
+  /* Reprise styles header/footer communs */
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.5;
+    color: #000;
+    background: #f0f9ff;
+  }
+
+  a {
+    text-decoration: none;
+    color: #098237;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #026f2c;
+    outline: none;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 15px;
+    background: white;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+    position: relative;
+  }
+  .header > img.logo {
+    position: absolute;
+    left: 15px;
+    height: 50px;
+    width: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  nav.nav {
+    display: flex;
+    gap: 1.5rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+  nav.nav a {
+    color: #098237;
+  }
+  nav.nav a:hover {
+    color: #026f2c;
+  }
+
+  .hamburger {
+    display: none;
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #098237;
+    z-index: 110;
+  }
+
+  /* Contenu page */
+  .container {
+    max-width: 1080px;
+    margin: 40px auto 80px;
+    padding: 0 15px;
+  }
+  h1.page-title {
+    color: #098237;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #098237;
+    padding-bottom: 8px;
+  }
+
+  /* Onglets filtres */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  .filter-btn {
+    background: #e5f5e7;
+    border: 2px solid transparent;
+    border-radius: 25px;
+    padding: 7px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #098237;
+    user-select: none;
+    transition: all 0.3s ease;
+  }
+  .filter-btn.active,
+  .filter-btn:hover,
+  .filter-btn:focus {
+    background: #098237;
+    color: white;
+    outline: none;
+    border-color: #045d11;
+  }
+
+  /* Grid photos */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+    gap: 20px;
+  }
+  .photo-grid img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .photo-grid img:hover, .photo-grid img:focus {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    outline: none;
+  }
+
+  /* Footer */
+  footer {
+    background: #eafff0;
+    color: #19955b;
+    font-size: 1rem;
+    padding-top: 25px;
+  }
+  .footer-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .footer-column {
+    flex: 1 1 250px;
+    min-width: 180px;
+  }
+  .footer-column h3 {
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #0f8a65;
+  }
+  .footer-link, .footer-text {
+    color: #438a7d;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .footer-link:hover {
+    color: #005239;
+  }
+  .footer-logo-social {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1 1 160px;
+    min-width: 160px;
+  }
+  .footer-logo-social img {
+    max-width: 140px;
+    height: auto;
+    cursor: default;
+  }
+  .footer-logo-social .footer-contact-icons {
+    display: flex;
+    gap: 10px;
+  }
+  .footer-logo-social .footer-contact-icons a {
+    width: 32px;
+    height: 32px;
+    background-color: #098237;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  .footer-logo-social .footer-contact-icons a:hover {
+    background-color: #026f2c;
+  }
+  .footer-bottom {
+    border-top: 1px solid #c7dec7;
+    margin-top: 15px;
+    padding: 15px 20px;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #438a7d;
+    text-align: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 740px) {
+    .header {
+      flex-direction: column;
+      justify-content: flex-start;
+      height: auto;
+      padding: 10px;
+    }
+    .header > img.logo {
+      position: static;
+      margin-bottom: 10px;
+      transform: none;
+    }
+    nav.nav {
+      flex-direction: column;
+      gap: 12px;
+      order: 2;
+      display: none;
+    }
+    nav.nav.collapsed {
+      display: flex;
+    }
+    .hamburger {
+      display: block;
+    }
+    .filters {
+      justify-content: center;
+      gap: 12px;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+<header class="header" aria-label="Navigation principale">
+  <img class="logo" src="Images/Ansuten.jpg" alt="Logo d'Ansuten"/>
+  <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+    <i class="fas fa-bars"></i>
+  </button>
+  <nav class="nav collapsed" id="nav-menu" aria-label="Menu principal" role="navigation" tabindex="-1">
+    <a href="index.html">ACCUEIL</a>
+    <a href="ansuten.html">ANSUTEN+</a>
+    <a href="#produits">PRODUITS/PROGRAMMES</a>
+    <a href="#appel">APPEL D'OFFRES+</a>
+    <a href="#partenaires">PARTENAIRES</a>
+    <a href="actualite.html">ACTUALITÉS</a>
+    <a href="#innovation">INNOVATION</a>
+  </nav>
+</header>
+
+<main class="container" role="main">
+  <h1 class="page-title">Bibliothèque</h1>
+
+  <div class="filters" role="tablist" aria-label="Filtres de la bibliothèque">
+    <button class="filter-btn active" role="tab" aria-selected="true" tabindex="0" data-filter="all">Tous</button>
+    <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" data-filter="fonc">Fonctionnaire</button>
+    <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" data-filter="lab">Laboratoire</button>
+    <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" data-filter="campus">Campus</button>
+    <button class="filter-btn" role="tab" aria-selected="false" tabindex="-1" data-filter="matos">Matériels électroniques</button>
+  </div>
+
+  <div class="photo-grid" aria-live="polite" aria-atomic="true">
+    <!-- Each image should have data-category -->
+    <img src="Images/Ansuten-02-scaled-1.jpg" alt="Personnel en formation" tabindex="0" data-category="fonc" />
+    <img src="Images/Ansuten-05-scaled-1.jpg" alt="Matériel équipé" tabindex="0" data-category="matos" />
+    <img src="Images/Ansuten-10-scaled-1.jpg" alt="Etudiants dans laboratoire" tabindex="0" data-category="lab" />
+    <img src="Images/Ansuten-10-scaled-1.jpg" alt="Campus d'enseignement" tabindex="0" data-category="campus" />
+    <img src="Images/Ansuten-18-scaled-1.jpg" alt="Fonctionnaire à l’œuvre" tabindex="0" data-category="fonc" />
+    <img src="Images/Gri 2.jpg" alt="Etudiants en classe" tabindex="0" data-category="campus" />
+    <img src="Images/Gri 1.jpg" alt="Nouveau matériel" tabindex="0" data-category="matos" />
+    <img src="Images/Gri 3.jpeg" alt="Laboratoire informatique" tabindex="0" data-category="lab" />
+    <img src="Images/Pres3.jpg" alt="Personnel administratif" tabindex="0" data-category="fonc" />
+    <img src="Images/Pres1.jpg" alt="Formation dans laboratoire" tabindex="0" data-category="lab" />
+    <img src="Images/Pres2.jpg" alt="Campus moderne" tabindex="0" data-category="campus" />
+    <img src="Images/Ansuten-18-scaled-1.jpg" alt="Matériels de pointe" tabindex="0" data-category="matos" />
+    <img src="Images/Gri 1.jpg" alt="Nouveau matériel" tabindex="0" data-category="matos" />
+    <img src="Images/Ansuten-10-scaled-1.jpg" alt="Etudiants dans laboratoire" tabindex="0" data-category="lab" />
+    <img src="Images/Gri 3.jpeg" alt="Laboratoire informatique" tabindex="0" data-category="lab" />
+  </div>
+</main>
+
+<footer aria-label="Pied de page">
+  <div class="footer-content">
+    <div class="footer-logo-social">
+      <img src="Images/Ansuten.jpg" alt="Logo Ansuten" />
+      <div class="footer-contact-icons" aria-label="Contact social">
+        <a href="https://www.facebook.com/ansuten" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:contact@ansuten.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+224625870245" aria-label="Téléphone"><i class="fas fa-phone"></i></a>
+        <a href="https://wa.me/+224625870245" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-column" aria-labelledby="liensutiles-label">
+      <h3 id="liensutiles-label">Liens utiles</h3>
+      <a href="index.html" class="footer-link">Qui sommes-nous ?</a>
+      <a href="#visionmission" class="footer-link">Vision & Mission</a>
+      <a href="#produits" class="footer-link">Nos produits</a>
+      <a href="#programmes" class="footer-link">Programmes & Projets</a>
+      <a href="#emplois" class="footer-link">Offres d’emplois</a>
+      <a href="#appel" class="footer-link">Appel d’offres</a>
+      <a href="#partenaires" class="footer-link">Partenaires</a>
+      <a href="#contact" class="footer-link">Contactez-nous</a>
+    </div>
+    <div class="footer-column" aria-labelledby="horaires-label">
+      <h3 id="horaires-label">Heures d'ouvertures</h3>
+      <p class="footer-text"><strong>Lundi - Vendredi :</strong> 08h00 - 17h00</p>
+      <p class="footer-text"><strong>Samedi - Dimanche :</strong> Fermé</p>
+    </div>
+  </div>
+  <div class="footer-bottom" role="contentinfo">
+    © 2024 Ansuten. Tous droits réservés.
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Hamburger toggle for responsive nav
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('nav.nav');
+  hamburger.addEventListener('click', () => {
+    const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+    hamburger.setAttribute('aria-expanded', !expanded);
+    navMenu.classList.toggle('collapsed');
+  });
+
+  // Filter functionality for photos
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const photos = document.querySelectorAll('.photo-grid img');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active state
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+        b.tabIndex = -1;
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      btn.tabIndex = 0;
+      btn.focus();
+
+      const filter = btn.getAttribute('data-filter');
+      photos.forEach(photo => {
+        if(filter === 'all' || photo.getAttribute('data-category') === filter) {
+          photo.style.display = 'block';
+          photo.setAttribute('tabindex', '0');
+        } else {
+          photo.style.display = 'none';
+          photo.setAttribute('tabindex', '-1');
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

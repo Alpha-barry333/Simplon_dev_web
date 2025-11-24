@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Actualité - Nouvelle innovation en Guinée</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+<style>
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #000;
+    background: #f0f9ff;
+  }
+  a {
+    color: #098237;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover,
+  a:focus {
+    color: #026f2c;
+    outline: none;
+  }
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 15px;
+    background: white;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+    position: relative;
+  }
+  .header > img.logo {
+    position: absolute;
+    left: 15px;
+    height: 50px;
+    width: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  nav.nav {
+    display: flex;
+    gap: 1.5rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+  nav.nav a {
+    color: #098237;
+  }
+  nav.nav a:hover {
+    color: #026f2c;
+  }
+  .hamburger {
+    display: none;
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #098237;
+    z-index: 110;
+  }
+  /* Main container */
+  main.container {
+    max-width: 720px;
+    margin: 40px auto 80px;
+    padding: 0 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  h1.article-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #098237;
+    margin-bottom: 20px;
+  }
+  /* Date publication */
+  .publish-date {
+    color: #6b7a6c;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    font-style: italic;
+  }
+  article img.featured-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    object-fit: contain;
+  }
+  article p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1.2rem;
+    white-space: pre-line;
+  }
+  strong {
+    color: #098237;
+  }
+  /* Section titres et sous-titres bas */
+  .related-section {
+    margin-top: 50px;
+  }
+  .related-section h2 {
+    font-size: 1.8rem;
+    color: #098237;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  .related-subtitles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+  .related-subtitle {
+    flex: 1 1 200px;
+    background: #e5f6e7;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+  .related-subtitle:hover,
+  .related-subtitle:focus {
+    background: #098237;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 111, 44, 0.4);
+    outline: none;
+  }
+  .related-subtitle h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .related-subtitle p {
+    font-size: 0.95rem;
+  }
+  /* Add photo above subtitle title */
+  .related-subtitle img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+  .related-subtitle:hover img,
+  .related-subtitle:focus img {
+    transform: scale(1.05);
+  }
+  /* Resources section */
+  .resources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 40px;
+    justify-content: center;
+  }
+  .resource-img {
+    width: 180px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .resource-img:hover,
+  .resource-img:focus {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+  /* Footer */
+  footer {
+    background: #eafff0;
+    color: #19955b;
+    font-size: 1rem;
+    padding-top: 25px;
+  }
+  .footer-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .footer-column {
+    flex: 1 1 250px;
+    min-width: 180px;
+  }
+  .footer-column h3 {
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #0f8a65;
+  }
+  .footer-link,
+  .footer-text {
+    color: #438a7d;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .footer-link:hover {
+    color: #005239;
+  }
+  .footer-logo-social {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1 1 160px;
+    min-width: 160px;
+  }
+  .footer-logo-social img {
+    max-width: 140px;
+    height: auto;
+    cursor: default;
+  }
+  .footer-logo-social .footer-contact-icons {
+    display: flex;
+    gap: 10px;
+  }
+  .footer-logo-social .footer-contact-icons a {
+    width: 32px;
+    height: 32px;
+    background-color: #098237;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  .footer-logo-social .footer-contact-icons a:hover {
+    background-color: #026f2c;
+  }
+  .footer-bottom {
+    border-top: 1px solid #c7dec7;
+    margin-top: 15px;
+    padding: 15px 20px;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #438a7d;
+    text-align: center;
+  }
+  /* Responsive */
+  @media (max-width: 740px) {
+    .header {
+      flex-direction: column;
+      justify-content: flex-start;
+      height: auto;
+      padding: 10px;
+    }
+    .header > img.logo {
+      position: static;
+      margin-bottom: 10px;
+      transform: none;
+    }
+    nav.nav {
+      flex-direction: column;
+      gap: 12px;
+      order: 2;
+      display: none;
+    }
+    nav.nav.collapsed {
+      display: flex;
+    }
+    .hamburger {
+      display: block;
+    }
+    .resources {
+      justify-content: center;
+    }
+    .resource-img {
+      width: 45%;
+      margin-bottom: 15px;
+    }
+    .related-subtitles {
+      flex-direction: column;
+      gap: 15px;
+    }
+    .related-subtitle {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+</head>
+
+<body>
+<header class="header" aria-label="Navigation principale">
+  <img class="logo" src="Images/Ansuten.jpg" alt="Logo d'Ansuten"/>
+  <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+    <i class="fas fa-bars"></i>
+  </button>
+  <nav class="nav collapsed" id="nav-menu" aria-label="Menu principal" role="navigation" tabindex="-1">
+    <a href="index.html">ACCUEIL</a>
+    <a href="ansuten.html">ANSUTEN+</a>
+    <a href="#produits">PRODUITS/PROGRAMMES</a>
+    <a href="#appel">APPEL D'OFFRES+</a>
+    <a href="#partenaires">PARTENAIRES</a>
+    <a href="actualite.html">ACTUALITÉS</a>
+    <a href="#innovation">INNOVATION</a>
+  </nav>
+</header>
+
+<main class="container" role="main">
+  <h1 class="article-title">Nouvelle innovation en Guinée</h1>
+  <div class="publish-date" aria-label="Date de publication">Publié le 15 septembre 2022</div>
+  <article>
+    <img src="Images/dev.jpg" alt="Photo du groupe Ansuten" class="featured-image" tabindex="0"/>
+    <p>
+      Dans le cadre des préparatifs de la première édition du concours Grand Prix ANSUTEN de la Tech et de l’innovation, les comités d’évaluation se sont réunis pour une première session de travail le 5 septembre 2022.
+    </p>
+    <p>
+      <strong>Apport de la réunion :</strong> 
+      Cette réunion inaugurale a offert aux membres des comités l’opportunité de détailler en profondeur de la méthodologie d’évaluation des projets soumis. Les discussions ont également porté sur les fiches d’évaluation élaborées par l’ANSUTEN, chaque membre ayant pu apporter ses commentaires, suggestions sur ces documents cruciaux. Tous les intervenants de l’Agence Nationale du Service Universel des Télécommunications et du Numérique (ANSUTEN) se sont unanimement engagés à faire de cette première édition un succès retentissant.
+    </p>
+    <p>
+      Lancées le 15 mai 2024, la phase de soumission, initialement prévue jusqu’au 21 juin 2024, a été prolongée jusqu’au 30 août 2024 en raison de l’intérêt considérable des nombreuses candidatures reçues. Cette extension a permis d’enregistrer un total de 139 projets, répartis comme suit : 89 projets d’entrepreneurs, 31 projets de start-ups et entreprises, et 19 projets de recherche. L’objectif principal de ce concours est de promouvoir l’innovation numérique et de soutenir la recherche dans le domaine des TICs et des télécommunications en Guinée.
+    </p>
+
+    <section class="related-section" aria-label="Titres et sous-titres liés">
+      <h2>Vous aimerez aussi :</h2>
+      <div class="related-subtitles">
+        <div tabindex="0" role="button" class="related-subtitle">
+          <img src="Images/Ansuten-02-scaled-1.jpg" alt="Image eau-système Tech 1" />
+          <h3>Eau-système Tech 1</h3>
+          <p>Innovation technique dans la gestion de l'eau.</p>
+        </div>
+        <div tabindex="0" role="button" class="related-subtitle">
+          <img src="Images/Ansuten-10-scaled-1.jpg" alt="Image eau-système Tech 2" />
+          <h3>Eau-système Tech 2</h3>
+          <p>Nouvelles solutions pour une meilleure distribution d'eau.</p>
+        </div>
+        <div tabindex="0" role="button" class="related-subtitle">
+          <img src="Images/Gri 4.jpg" alt="Image eau-système Tech 3" />
+          <h3>Eau-système Tech 3</h3>
+          <p>Technologies avancées pour traitement d'eau durable.</p>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer aria-label="Pied de page">
+  <div class="footer-content">
+    <div class="footer-logo-social">
+      <img src="Images/Ansuten.jpg" alt="Logo Ansuten" />
+      <div class="footer-contact-icons" aria-label="Contact social">
+        <a href="https://www.facebook.com/ansuten" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:contact@ansuten.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+224625870245" aria-label="Téléphone"><i class="fas fa-phone"></i></a>
+        <a href="https://wa.me/+224625870245" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-column" aria-labelledby="liensutiles-label">
+      <h3 id="liensutiles-label">Liens utiles</h3>
+      <a href="index.html" class="footer-link">Qui sommes-nous ?</a>
+      <a href="#visionmission" class="footer-link">Vision & Mission</a>
+      <a href="#produits" class="footer-link">Nos produits</a>
+      <a href="#programmes" class="footer-link">Programmes & Projets</a>
+      <a href="#emplois" class="footer-link">Offres d’emplois</a>
+      <a href="#appel" class="footer-link">Appel d’offres</a>
+      <a href="#partenaires" class="footer-link">Partenaires</a>
+      <a href="#contact" class="footer-link">Contactez-nous</a>
+    </div>
+    <div class="footer-column" aria-labelledby="horaires-label">
+      <h3 id="horaires-label">Heures d'ouvertures</h3>
+      <p class="footer-text"><strong>Lundi - Vendredi :</strong> 08h00 - 17h00</p>
+      <p class="footer-text"><strong>Samedi - Dimanche :</strong> Fermé</p>
+    </div>
+  </div>
+  <div class="footer-bottom" role="contentinfo">
+    © 2024 Ansuten. Tous droits réservés.
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Hamburger toggle menu
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('nav.nav');
+  hamburger.addEventListener('click', () => {
+    const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+    hamburger.setAttribute('aria-expanded', !expanded);
+    navMenu.classList.toggle('collapsed');
+  });
+</script>
+</body>
+</html>

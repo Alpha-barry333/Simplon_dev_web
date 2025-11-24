@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 3</title>
+</head>
+<body>
+    <div id="info-scroll" style="position: fixed; top: 10px; right: 10px; background: rgb(21, 136, 243); padding: 10px; border: 1px solid gray;">position de défilement: 0 pixels</div>
+
+    <div style="height: 2000px; background: linear-gradient(to bottom, #fff, #ccc);">
+    <p>Faites défiler la page vers le bas...</p>
+    </div>
+
+    <script>
+        const infoScroll = document.querySelector('#info-scroll');
+        window.addEventListener('scroll', () => {
+        const position = window.scrollY;
+        infoScroll.textContent = `Position de défilement: ${Math.round(position)} pixels`;
+        });
+        
+    </script>
+</body>
+</html>

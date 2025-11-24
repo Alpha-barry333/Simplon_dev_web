@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 2</title>
+</head>
+<body>
+    <button id="btn-magique">Clique-moi</button>
+    <p id="message"></p>
+
+    <script>
+        const butClick = document.querySelector('#btn-magique');
+        const MessPar = document.querySelector('#message');
+
+        butClick.addEventListener('click', () =>{
+            MessPar.textContent = "Le bouton a été cliqué à l'instant."
+        });
+
+        //Bonus 2 ............
+        setTimeout(() =>{
+            MessPar.textContent = '';
+        }, 3000);
+    </script>
+</body>
+</html>

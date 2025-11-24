@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice 1</title>
+</head>
+<body>
+    <h1 id="titre-principal">Le Titre</h1>
+    <ul>
+        <li class="item-liste">Elément 1</li>
+        <li class="item-liste">Elément 2</li>
+        <li class="item-liste">Elément 3</li>
+    </ul>
+
+    <script>
+        const titre = document.querySelector('#titre-principal');
+        titre.textContent ='DOM Maîtrisé !';
+
+        const list1 = document.querySelector('.item-liste');
+        list1.textContent = 'Premier élément sélectionné';
+
+        //Bonus 1...........
+        const listAll = document.querySelectorAll('.item-liste');
+        console.log('Liste de tous les éléments', listAll);
+    </script>
+</body>
+</html>
